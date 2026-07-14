@@ -1,9 +1,10 @@
 
 import {FaSearch} from "react-icons/fa"
+import {Link} from "react-router-dom"
 export default function Header() {
   return (
     <header className="bg-slate-200 shadow-md">
-   <div className= "flex justify-between items-cente max-w-6xl mx-auto p-3">
+   <div className= "flex justify-between items-center max-w-6xl mx-auto p-3">
        <h1 className= "font-bold text-sm sm:text-xl flex flex-wrap" >
    <span className="text-slate-500">Sahand</span>
    <span className="text-slate-700">Estate</span>
@@ -11,10 +12,24 @@ export default function Header() {
 
 
       </h1>
-    <form className="bg-slate-100 p-3 rounded-lg ">
-      <input type="text" placeholder="search ..." className="bg-transparent" />
-      <FaSearch />
+    <form className="bg-slate-100 p-3 rounded-lg flex items-start">
+      <input type="text" placeholder="search ..." className="bg-transparent focus:outline-none w-24 sm:w-64" />
+      <FaSearch className='text-slate-600' />
+    
+    
     </form>
+     <ul className='flex gap-2'>
+      <li className='hidden sm:inline hover:underline text-slate-700'>
+        <Link to="/">Home</Link>
+      </li>
+      <li className='hidden sm:inline hover:underline text-slate-700'>
+        <Link to="/about">About</Link>
+      </li>
+      <li className=' hover:underline text-slate-700'>
+        <Link to="/sign-in">Sign in</Link>
+      </li>
+
+     </ul>
    </div>
       </header>
   )
