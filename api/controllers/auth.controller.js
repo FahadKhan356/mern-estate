@@ -1,7 +1,8 @@
 import User from "../models/user.model.js";
 import bcryptjs from "bcryptjs";
+import { errorHandler } from "../utils/error.js";
 
-export const signup = async (req, res) => {
+export const signup = async (req, res, next) => {
     try {
         const { username, userName, email, password } = req.body;
         const finalUserName = userName ?? username;
@@ -20,9 +21,7 @@ export const signup = async (req, res) => {
         await newUser.save();
         res.status(201).json("user created successfully!");
     } catch (error) {
-        if (error.code === 11000) {
-            return res.status(409).json({ message: "A user with this userName or email already exists." });
-        }
-        res.status(500).json({ message: "Signup failed", error: error.message });
+        next(error);
+    // next(errorHandler(500, "Internal Server Error custom"));
     }
 };
