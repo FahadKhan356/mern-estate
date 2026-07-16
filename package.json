@@ -6,6 +6,7 @@
     "dev": "nodemon api/index.js"
   },
   "dependencies": {
+    "bcryptjs": "^3.0.3",
     "dotenv": "^17.4.2",
     "express": "^4.21.2",
     "mongoose": "^8.9.1"

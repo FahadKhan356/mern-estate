@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import dns from 'dns';
 import userRoutes from './routes/user.routes.js';
+import authRoutes from './routes/auth.route.js';  
 
 dotenv.config();
 
@@ -15,15 +16,18 @@ const MONGO_URI = rawMongoUri.trim().replace(/^"(.+)"$/, '$1') ||
 
 mongoose.connect(MONGO_URI, {
   connectTimeoutMS: 10000,
-  serverSelectionTimeoutMS: 10000,
+  serverSelectionTimeoutMS: 10000, 
 })
   .then(() => console.log('MongoDB Connected...'))
   .catch(err => console.log('Connection Error: ', err));
 
 const app = express();
+app.use(express.json());
 app.listen(5040, () => {
   console.log('Server is running on port 5040');
 });
 
 app.use('/api/user',userRoutes);  
+app.use('/api/auth',authRoutes);
+
 // app.get('/',); 
