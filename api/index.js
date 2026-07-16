@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import dns from 'dns';
+import userRoutes from './routes/user.routes.js';
 
 dotenv.config();
 
@@ -23,3 +24,6 @@ const app = express();
 app.listen(5040, () => {
   console.log('Server is running on port 5040');
 });
+
+app.use('/api/user',userRoutes);  
+// app.get('/',); 
