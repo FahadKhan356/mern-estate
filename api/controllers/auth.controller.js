@@ -21,7 +21,13 @@ export const signup = async (req, res, next) => {
         await newUser.save();
         res.status(201).json("user created successfully!");
     } catch (error) {
+        if (error.code === 11000) {
+            const field = Object.keys(error.keyValue || {})[0] || 'field';
+            return res.status(409).json({
+                success: false,
+                message: `${field} already exists`,
+            });
+        }
         next(error);
-    // next(errorHandler(500, "Internal Server Error custom"));
     }
 };

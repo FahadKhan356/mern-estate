@@ -16,9 +16,20 @@ const MONGO_URI = rawMongoUri.trim().replace(/^"(.+)"$/, '$1') ||
 
 mongoose.connect(MONGO_URI, {
   connectTimeoutMS: 10000,
-  serverSelectionTimeoutMS: 10000, 
+  serverSelectionTimeoutMS: 10000,
 })
-  .then(() => console.log('MongoDB Connected...'))
+  .then(async () => {
+    console.log('MongoDB Connected...');
+
+    try {
+      await mongoose.connection.collection('users').dropIndex('username_1');
+      console.log('Dropped legacy username index');
+    } catch (error) {
+      if (error.code !== 26) {
+        console.warn('Could not drop legacy username index:', error.message);
+      }
+    }
+  })
   .catch(err => console.log('Connection Error: ', err));
 
 const app = express();
