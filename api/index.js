@@ -11,8 +11,7 @@ dotenv.config();
 dns.setServers(['1.1.1.1', '8.8.8.8']);
 
 const rawMongoUri = process.env.MONGO || '';
-const MONGO_URI = rawMongoUri.trim().replace(/^"(.+)"$/, '$1') ||
-  'mongodb+srv://sahand:sahand@mern-estate.eft0pfw.mongodb.net/mern-estate?retryWrites=true&w=majority';
+const MONGO_URI = rawMongoUri.trim().replace(/^"(.+)"$/, '$1');
 
 mongoose.connect(MONGO_URI, {
   connectTimeoutMS: 10000,
